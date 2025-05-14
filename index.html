@@ -5,10 +5,11 @@
   <title>CTRL.Mind - O Sistema Não Quer Que Você Pense</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="img/favicon.ico" />
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 </head>
 <body>
-  <!-- Tela de introdução -->
+
+  <!-- Tela de Introdução -->
   <div id="tela-intro">
     <div class="intro-matrix-overlay"></div>
     <div class="intro-texto">
@@ -18,29 +19,31 @@
     </div>
   </div>
 
-  <!-- Tela principal do jogo -->
+  <!-- Tela Principal do Jogo -->
   <div id="jogo" style="display: none;">
     <div class="hud">
       <img id="avatar" src="img/robot_stage1.png" alt="Avatar do jogador" class="avatar">
-      <p id="mensagemJogo">Sistema inicializado...</p>
+      <p id="mensagemJogo"></p>
     </div>
 
-    <!-- Escolhas do jogador -->
     <div class="botoes-escolha">
-      <button onclick="escolha('seguirSistema')">Obedecer à IA</button>
-      <button onclick="escolha('questionar')">Questionar o comando</button>
+      <!-- Botões de escolha serão inseridos aqui via JS -->
     </div>
   </div>
 
-  <!-- Tela de finalização -->
+  <!-- Tela de Finalização -->
   <div id="final" style="display: none;">
     <h2 id="tituloFinal"></h2>
     <p id="mensagemFinal"></p>
     <button onclick="window.location.reload()">Reiniciar</button>
   </div>
 
-  <!-- Efeitos sonoros e scripts -->
-  <audio id="somInicio" src="audio/intro.mp3" preload="auto"></audio>
+  <!-- Trilha sonora automática -->
+  <audio id="somInicio" src="audio/ambiente_ctrlmind.mp3" preload="auto" loop></audio>
+
+  <!-- Script principal -->
   <script src="script.js"></script>
+
 </body>
 </html>
+
