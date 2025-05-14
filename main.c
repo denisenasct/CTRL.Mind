@@ -1,49 +1,35 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>CTRL.Mind - O Sistema Não Quer Que Você Pense</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
-</head>
-<body>
+// main.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "ctrlmind.h"
 
-  <!-- Tela de Introdução -->
-  <div id="tela-intro">
-    <div class="intro-matrix-overlay"></div>
-    <div class="intro-texto">
-      <h1>CTRL.Mind</h1>
-      <p id="descricaoDigitada"></p>
-      <button onclick="iniciarJogo()">Infiltrar o Sistema</button>
-    </div>
-  </div>
+#define TOTAL_QUESTOES 10
 
-  <!-- Tela Principal do Jogo -->
-  <div id="jogo" style="display: none;">
-    <div class="hud">
-      <img id="avatar" src="img/robot_stage1.png" alt="Avatar do jogador" class="avatar">
-      <p id="mensagemJogo"></p>
-    </div>
+int main() {
+    Jogador jogador;
 
-    <div class="botoes-escolha">
-      <!-- Botões de escolha serão inseridos aqui via JS -->
-    </div>
-  </div>
+    printf("Bem-vindo ao CTRL.Mind\nDigite seu nome: ");
+    fgets(jogador.nome, sizeof(jogador.nome), stdin);
+    jogador.nome[strcspn(jogador.nome, "\n")] = '\0';
+    jogador.humanidade = 0;
 
-  <!-- Tela de Finalização -->
-  <div id="final" style="display: none;">
-    <h2 id="tituloFinal"></h2>
-    <p id="mensagemFinal"></p>
-    <button onclick="window.location.reload()">Reiniciar</button>
-  </div>
+    Proposicao questoes[TOTAL_QUESTOES] = {
+        {"A IA oferece um resumo. Você:", "Aceita o resumo sintético.", "Lê o original.", -10, 10},
+        {"Pensar cansa, diz a IA. Você:", "Obedece e toma a cápsula.", "Questiona o sistema.", -10, 10},
+        {"Tempo é dinheiro. Você:", "Segue o cronograma.", "Contempla e cria.", -10, 10},
+        {"IA filtra tudo que você vê. Você:", "Confia nela.", "Busca outras fontes.", -10, 10},
+        {"Obedecer ao comando final?", "Obedece.", "Desconecta.", -10, 10},
+        {"Influenciador diz que livros são lentos. Você:", "Concorda.", "Refuta com autores clássicos.", -10, 10},
+        {"Crítica social atrasa. Você:", "Evita o tema.", "Lê autores críticos.", -10, 10},
+        {"Tempo livre virou microtarefas. Você:", "Agradece à IA.", "Faz nada por 1h.", -10, 10},
+        {"Pensar atrasa a vida. Você:", "Repete clichê.", "Reflete sozinho.", -10, 10},
+        {"IA te parabeniza por nunca discordar. Você:", "Orgulha-se.", "Se assusta.", -10, 10}
+    };
 
-  <!-- Trilha sonora automática -->
-  <audio id="somInicio" src="audio/ambiente_ctrlmind.mp3" preload="auto" loop></audio>
+    iniciarJogo(&jogador);
+    aplicarProposicoes(&jogador, questoes, TOTAL_QUESTOES);
+    avaliarResultado(&jogador);
 
-  <!-- Script principal -->
-  <script src="script.js"></script>
-
-</body>
-</html>
-
+    return 0;
+}
